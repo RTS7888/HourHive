@@ -1,0 +1,43 @@
+.animate-in{
+    animation: image-in 3s;
+}
+
+
+@keyframes image-in {
+  
+        0% {
+            visibility: visible;
+            transform: translate3d(100%, 0, 0)
+        }
+        100% {
+            transform: translate3d(0, 0, 0)
+        }
+}
+
+.form-animate{
+    animation:  form-in 2.5s;
+}
+
+@keyframes form-in{
+    0% {
+        visibility: visible;
+        transform: translate3d(100%, 0, 0)
+    }
+    100% {
+        transform: translate3d(0, 0, 0)
+    } 
+}
+
+
+.animate-fade{
+    animation:  heading-fade 3s;
+}
+
+@keyframes heading-fade{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}

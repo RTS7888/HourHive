@@ -1,0 +1,19 @@
+<div class="flex flex-row bg-white w-full h-full">
+  <!-- Sidebar Section -->
+  <div class="hidden md:block  w-1/6 sticky top-0 h-full bg-gray-100">
+    <app-sidenav></app-sidenav>
+  </div>
+
+  <!-- Main Content Section -->
+  <div class="flex flex-col w-full  bg-white h-full lg:w-5/6 ">
+    <!-- Navbar Section -->
+    <div class="sticky top-0 z-10  ">
+      <app-navbar></app-navbar>
+    </div>
+
+    <!-- Router Outlet Section -->
+    <div class="flex-1 p-2 overflow-y-auto overflow-x-hidden custom-scrollbar ">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

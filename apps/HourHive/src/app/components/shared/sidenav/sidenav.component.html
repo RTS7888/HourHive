@@ -1,0 +1,84 @@
+<div class="border-r-2 bg-white  font-poppins h-screen">
+  <!-- Header Section -->
+  <div class="border-b-2">
+    <div
+      class="lg:py-5 lg:px-4 lg:gap-3 md:px-4 md:py-5    overflow-hidden flex items-center justify-between"
+    >
+      <!-- Logo Section -->
+      <div class="flex-shrink-0">
+        <img
+          src="assets/logo.svg"
+          alt="Logo"
+          class="lg:h-6 md:h-6 object-contain"
+        />
+      </div>
+
+      <!-- Toggle Arrow Section -->
+      <div (click)="toggle()" class="cursor-pointer  flex-shrink-0">
+        <img
+          src="assets/togglearrow.svg"
+          alt="Toggle Arrow"
+          class="h-4 md:h-4 object-contain"
+          [ngClass]="{
+            'scale-x-[-1]' : toggleNavBar
+          }"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="px-3 overflow-hidden">
+    <div class="border-b-2 py-6 gap-1 flex md:text-sm flex-col">
+      <div
+        (click)="OpenNavigationState(item.navigationPath)"
+        [ngClass]="{
+          'bg-blue-200 text-black hover:bg-blue-200': activePath === item.navigationPath
+        }"
+
+        
+        class="py-2 cursor-pointer flex flex-row items-center gap-3 hover:bg-blue-100 rounded-lg px-4"
+        *ngFor="let item of navbar"
+      >
+        <div class="hover:text-black">
+          <img [src]="item.imgURl" alt="{{ item.Heading }}" />
+        </div>
+        <div class="flex justify-start">
+          {{ item.Heading }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Section -->
+  <div class="px-3">
+    <div
+      class="flex py-6 overflow-hidden  flex-row justify-between px-4 font-medium text-slate-500 items-center"
+    >
+      <div class="text-base md:text-sm">MY PROJECTS</div>
+      <div class="cursor-pointer">
+        <img src="assets/addIcon.svg" alt="Add Project" />
+      </div>
+    </div>
+    <div class="border-b-2 md:text-sm overflow-hidden pb-6 flex flex-col max-h-[330px] overflow-y-auto">
+      <div
+        class="py-2 cursor-pointer flex flex-row items-center gap-3 hover:bg-blue-100 rounded-lg px-4 mr-2"
+        *ngFor="let item of projectList"
+      >
+        <div class="items-center">
+          <div
+            class="h-3 w-3 rounded-full"
+            [ngStyle]="{ 'background-color': item.colorCode }"
+          ></div>
+        </div>
+        <div>
+          {{ item.Heading }}
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="items-center">
+      <img src="assets/msgCard.svg" alt="" />
+    </div> -->
+  </div>
+</div>

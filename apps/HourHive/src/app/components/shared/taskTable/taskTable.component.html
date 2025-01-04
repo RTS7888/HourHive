@@ -1,0 +1,90 @@
+<div class="border w-full my-4 font-poppins overflow-x-auto">
+  <table class="border-collapse w-full text-sm text-left  ">
+    <tbody
+      cdkDropList
+      *ngFor="let taskGroup of taskData; let projectIndex = index"
+      (cdkDropListDropped)="onDrop($event, projectIndex)"
+      class="divide-y bg-white divide-gray-200"
+    >
+      <div class="border-2 bg-blue-100 ">
+        <!-- Make this sticky -->
+        <tr class=" font-medium text-lg px-4 w-96  bg-blue-100 ">
+          <th class="py-6 px-4 w-96" 
+          [ngStyle]="{
+            position:'sticky' ,
+            left: '0' ,
+            background:  '#dbeafe' ,
+            zIndex: '2' ,
+            
+          }">
+            {{ taskGroup.Project }}
+          </th>
+            
+          
+        </tr>
+
+        <div>
+          <tr class="bg-gray-100">
+            <th
+              *ngFor="let item of TableHeaderCol"
+              [ngStyle]="{
+                position: item.label === 'Task Name' ? 'sticky' : null,
+                left: item.label === 'Task Name' ? '0' : null,
+                background: item.label === 'Task Name' ? '#f3f4f6' : null,
+                zIndex: item.label === 'Task Name' ? '2' : '1',
+                
+              }"
+              class="border px-4 py-3 w-96 font-medium"
+            >
+              {{ item.label }}
+            </th>
+          </tr>
+        </div>
+        <div>
+          <tr
+            *ngFor="let task of taskGroup.Tasks"
+            cdkDrag
+            class="hover:bg-gray-50 flex flex-row group bg-white cursor-pointer"
+          >
+            <td
+              *ngFor="let col of TableHeaderCol"
+              [ngStyle]="{
+                position: col.label === 'Task Name' ? 'sticky' : null,
+                left: col.label === 'Task Name' ? '0' : null,
+                background: col.label === 'Task Name' ? 'white' : null,
+                zIndex: col.label === 'Task Name' ? '2' : '1'
+              }"
+              class="border px-4 py-2 w-96"
+            >
+              <div class="flex flex-row">
+                <div
+                  class="opacity-0 group-hover:opacity-100 transition-all duration-200"
+                  *ngIf="col.label == 'Task Name'"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="24px"
+                    viewBox="0 -960 960 960"
+                    width="24px"
+                    fill="#666666"
+                  >
+                    <path
+                      d="M360-160q-33 0-56.5-23.5T280-240q0-33 23.5-56.5T360-320q33 0 56.5 23.5T440-240q0 33-23.5 56.5T360-160Zm240 0q-33 0-56.5-23.5T520-240q0-33 23.5-56.5T600-320q33 0 56.5 23.5T680-240q0 33-23.5 56.5T600-160ZM360-400q-33 0-56.5-23.5T280-480q0-33 23.5-56.5T360-560q33 0 56.5 23.5T440-480q0 33-23.5 56.5T360-400Zm240 0q-33 0-56.5-23.5T520-480q0-33 23.5-56.5T600-560q33 0 56.5 23.5T680-480q0 33-23.5 56.5T600-400ZM360-640q-33 0-56.5-23.5T280-720q0-33 23.5-56.5T360-800q33 0 56.5 23.5T440-720q0 33-23.5 56.5T360-640Zm240 0q-33 0-56.5-23.5T520-720q0-33 23.5-56.5T600-800q33 0 56.5 23.5T680-720q0 33-23.5 56.5T600-640Z"
+                    />
+                  </svg>
+                </div>
+
+                <input
+                  type="text"
+                  [(ngModel)]="task[col.Key]"
+                  class="w-full p-1 border-none cursor-pointer focus:ring focus:outline-none"
+                  placeholder="Enter value"
+                />
+              </div>
+            </td>
+          </tr>
+        </div>
+      </div>
+    </tbody>
+  </table>
+</div>

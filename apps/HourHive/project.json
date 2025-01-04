@@ -3,6 +3,7 @@
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "prefix": "app",
+  "root": "apps/HourHive",
   "sourceRoot": "apps/HourHive/src",
   "tags": [],
   "targets": {

@@ -1,0 +1,21 @@
+.profile-img{
+    background-image: url('https://t3.ftcdn.net/jpg/06/99/46/60/360_F_699466075_DaPTBNlNQTOwwjkOiFEoOvzDV0ByXR9E.jpg');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+
+.fade-bottom {
+    -webkit-mask-image: linear-gradient(black, transparent); 
+    mask-image: linear-gradient(black, transparent); 
+    -webkit-mask-position: bottom;
+    mask-position: bottom;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+  }
+  
+
+

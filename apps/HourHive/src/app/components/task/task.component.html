@@ -1,0 +1,59 @@
+<div class="m-0.4 rounded-xl font-poppins flex flex-col">
+    <div class="flex flex-row justify-between">
+        <div class="py-1 px-1 text-blue-700 title text-lg font-semibold">
+            My Tasks
+        </div>
+
+        <div class="flex flex-row text-xs text-center items-center gap-3">
+            <!-- <div class="py-1 px-2 rounded-md cursor-pointer bg-gray-300">Share</div> -->
+            <div
+                class="py-1 px-2 flex flex-row gap-2 rounded-md cursor-pointer hover:bg-gray-200 border border-transparent hover:border-blue-500">
+                <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px"
+                        fill="#2c67dd">
+                        <path
+                            d="M181-528q-14 0-25-11t-11-25v-216q0-15.3 11-25.65Q167-816 181-816h216q15.3 0 25.65 10.35Q433-795.3 433-780v216q0 14-10.35 25T397-528H181Zm35-216v144-144Zm348 216q-14 0-25-11t-11-25v-216q0-15.3 11-25.65Q550-816 564-816h216q15.3 0 25.65 10.35Q816-795.3 816-780v216q0 14-10.35 25T780-528H564Zm36-216v144-144ZM181-144q-14 0-25-11t-11-25v-216q0-15.3 11-25.65Q167-432 181-432h216q15.3 0 25.65 10.35Q433-411.3 433-396v216q0 14-10.35 25T397-144H181Zm35-216v144-144Zm456 216q-14 0-25-11t-11-25v-72h-71.91q-15.09 0-25.59-10.29t-10.5-25.5q0-15.21 11-25.71t25-10.5h72v-72.9q0-15.3 10.35-25.2Q656.7-432 672-432q15.28 0 25.61 10.35T707.94-396v72h72.78Q796-324 806-314q10 10 10 26 0 14-10.35 25T780-252h-72v71.91q0 15.09-10 25.59T672-144Zm-72-600v144h144v-144H600Zm-384 0v144h144v-144H216Zm0 384v144h144v-144H216Z" />
+                    </svg>
+                </div>
+                <div class="text-center items-center content-center">Customize</div>
+            </div>
+        </div>
+    </div>
+
+    <!--Task View List -->
+    <div class="border-b-2" >
+        <div class="flex flex-row text-sm my-3 gap-1 ">
+            <div
+              *ngFor="let item of items; let i = index"
+              (click)="setActive(i)"
+              class="px-2 py-1 transition-all duration-200 cursor-pointer border border-transparent hover:text-blue-500 hover:border-slate-300 hover:bg-gray-100 hover:rounded-md"
+              [ngClass]="{'text-blue-500 bg-gray-200 rounded-md border-slate-300 underline underline-offset-4 ': i === activeIndex}">
+              <div class="flex gap-0.5 flex-row "
+              >
+                <svg [attr.fill]="i === activeIndex ? '#2563eb' : '#666666'" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px">
+                  <path [attr.d]="item.icon"></path>
+                </svg>
+                <div>{{ item.label }}</div>
+              </div>
+            </div>
+          </div>    
+    </div>
+    
+
+      <div class="border-b-2">
+        <div class="flex text-xs  py-3 mx-6 flex-row justify-between ">
+            <div class="py-2 px-2 hover:shadow-md bg-blue-500 rounded-md text-white cursor-pointer "> Create Task</div>
+            <div  class="flex flex-row gap-1" >
+                <div class="items-center text-center flex px-2 border border-transparent hover:border-gray-300  hover:bg-gray-200 cursor-pointer rounded-md">Filter</div>
+                <div class="items-center text-center flex px-2 border border-transparent hover:border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md">Sort</div>
+                <div class="items-center text-center flex px-2 border border-transparent hover:border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md">Group</div>
+                <div class="items-center text-center flex px-2 border border-transparent hover:border-gray-300 hover:bg-gray-200 cursor-pointer rounded-md">Options</div>
+            </div>
+          </div>
+
+      </div>
+
+      <app-task-table></app-task-table>
+      
+      
+</div>

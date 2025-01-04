@@ -1,0 +1,132 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+// User Model
+model User {
+  id          Int       @id @default(autoincrement())
+  username    String    @unique
+  email       String    @unique
+  passwordHash String
+  role        Role      
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  projects    Project[] @relation("CreatedProjects")
+  userProjects UserProject[]
+  logs        Log[]
+
+  ProjectAudit ProjectAudit[]
+
+  DailySchedule DailySchedule[]
+}
+
+// Role Enum
+enum Role {
+  ADMIN
+  USER
+}
+
+// Project Model
+model Project {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  createdBy   Int
+  joinLink    String        @unique @default(uuid())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  creator     User          @relation("CreatedProjects", fields: [createdBy], references: [id])
+  userProjects UserProject[]
+  logs        Log[]
+  audits      ProjectAudit[]
+
+  DailySchedule DailySchedule[]
+}
+
+// UserProject Model (Mapping Table)
+model UserProject {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  projectId  Int
+  role       ProjectRole @default(MEMBER)
+  joinedAt   DateTime @default(now())
+  user       User     @relation(fields: [userId], references: [id])
+  project    Project  @relation(fields: [projectId], references: [id])
+
+  @@unique([userId, projectId])
+}
+
+// ProjectRole Enum
+enum ProjectRole {
+  ADMIN
+  MEMBER
+}
+
+// Log Model
+model Log {
+  id          Int      @id @default(autoincrement())
+  projectId   Int
+  userId      Int
+  logEntry    String
+  createdAt   DateTime @default(now())
+  project     Project  @relation(fields: [projectId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+// ProjectAudit Model
+model ProjectAudit {
+  id          Int      @id @default(autoincrement())
+  projectId   Int
+  userId      Int
+  action      String
+  details     Json
+  performedAt DateTime @default(now())
+  project     Project  @relation(fields: [projectId], references: [id])
+  user        User     @relation(fields: [userId], references: [id])
+}
+
+
+
+// Daily Schedule Model
+model DailySchedule {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  projectId    Int
+  date         DateTime
+  status       ScheduleStatus @default(PENDING) // 'PENDING', 'APPROVED', 'REJECTED'
+  submittedAt  DateTime?      // Timestamp of submission
+  reviewedAt   DateTime?      // Timestamp of review
+  timeframes   TimeFrame[]    @relation("ScheduleTimeframes")
+  user         User           @relation(fields: [userId], references: [id])
+  project      Project        @relation(fields: [projectId], references: [id])
+
+  @@unique([userId, projectId, date]) // A user can submit one schedule per project per day
+}
+
+// Time Frame Model
+model TimeFrame {
+  id             Int           @id @default(autoincrement())
+  dailyScheduleId Int
+  startTime      DateTime
+  endTime        DateTime
+  activity       String        // Description of the work/activity
+  schedule       DailySchedule @relation("ScheduleTimeframes", fields: [dailyScheduleId], references: [id])
+}
+
+// Schedule Status Enum
+enum ScheduleStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+

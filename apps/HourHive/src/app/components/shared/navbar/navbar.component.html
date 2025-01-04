@@ -1,0 +1,62 @@
+<div class="lg:py-3 md:py-3 bg-white py-2 font-poppins  border-b-2 px-10 flex flex-row  justify-between items-center">
+    <!-- Search Input -->
+    <div (click)="toggle()" class="cursor-pointer block md:hidden lg:hidden  flex-shrink-0">
+      <img
+        src="assets/togglearrow.svg"
+        alt="Toggle Arrow"
+        class="h-4 md:h-4   object-contain"
+        [ngClass]="{
+          'scale-x-[-1]' : toggleNavBar
+        }"
+      />
+    </div>
+    <div>
+      <input
+        class="px-4 text-slate-500 text-sm border-2 rounded-lg py-2 lg:w-80 md:w-80 w-44 h-10 box-border"
+        type="text"
+        name="searchBar"
+        placeholder="Search for anything..."
+      />
+    </div>
+  
+    <!-- Icons Section -->
+    
+  
+    <!-- User Info Section -->
+    <div class="flex items-center gap-2 md:gap-4 lg:gap-8">
+      <!-- Icon Section -->
+      <div class=" lg:flex items-center lg:gap-6">
+        <!-- Uncomment the icons if needed -->
+        <!-- <img src="assets/callenderIcon.svg" alt="Calendar Icon" class="h-6 w-6 cursor-pointer"> -->
+        <img src="assets/faqIcon.svg" alt="FAQ Icon" class="h-6 w-6 cursor-pointer">
+        <!-- <img src="assets/notificationIcon.svg" alt="Notification Icon" class="h-6 w-6 cursor-pointer"> -->
+      </div>
+    
+      <!-- User Details Section -->
+      <div class="flex items-center cursor-pointer gap-3 lg:gap-5">
+        <!-- User Avatar -->
+        <div>
+          <img 
+            src="https://avatarfiles.alphacoders.com/364/364538.png" 
+            class="h-10 w-10 sm:h-8 sm:w-8 border border-slate-300 rounded-full" 
+            alt="User Avatar">
+        </div>
+    
+        <!-- User Info -->
+        <div class="hidden md:flex items-center text-right space-x-2">
+          <div class="flex flex-col">
+            <div class="font-medium text-base">Atharva Zade</div>
+            <div class="text-xs text-slate-500">MH, India</div>
+          </div>
+        </div>
+        
+    
+        <!-- Dropdown Icon -->
+        <div class="hidden md:block">
+          <img src="assets/arrowIcon.svg" class="h-4 w-4" alt="Dropdown Icon">
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
